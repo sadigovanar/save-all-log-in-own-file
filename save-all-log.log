@@ -1,0 +1,16 @@
+### On Ubuntu
+sudo -e /etc/bash.bashrc
+export PROMPT_COMMAND='RETRN_VAL=$?;logger -p local6.debug "$(whoami) [$$]: $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//" ) [$RETRN_VAL]"'
+sudo -e /etc/rsyslog.d/bash.conf
+local6.*    /var/log/commands.log
+sudo service rsyslog restart
+/var/log/commands.log
+### On Centos RedHat AlmaLinux
+nano /etc/bashrc
+##add this section below 
+export PROMPT_COMMAND='RETRN_VAL=$?;logger -p local6.debug "$(whoami) [$$]: $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//" ) [$RETRN_VAL]"'
+### create file in folder rstslog
+/etc/rsyslog.d/bash.conf
+### Add this section 
+local6.*    /var/log/commands.log
+sudo service rsyslog restart
